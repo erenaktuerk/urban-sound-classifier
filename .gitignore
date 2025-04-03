@@ -1,0 +1,45 @@
+# Python bytecode files
+*.pyc
+*.pyo
+_pycache_/
+
+# Virtual environment
+venv/
+
+# IDE files (Visual Studio Code)
+.vscode/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# macOS specific files
+.DS_Store
+
+# Windows specific files
+Thumbs.db
+
+# Logs
+*.log
+
+# Test outputs
+*.coverage
+*.tox
+*.nox
+.coverage.
+nosetests.xml
+coverage.xml
+*.hypothesis/
+
+# Environment variables files
+.env
+*.env
+
+# PyCharm specific files
+.idea/
+
+# IntelliJ IDEA specific files
+*.iml
+
+# Other unnecessary files
+*.bak
+*.swp
