@@ -1,15 +1,22 @@
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout
+from tensorflow.keras.optimizers import Adam
+from src.config import INPUT_SHAPE, NUM_CLASSES
+
 from keras.models import Sequential
 from keras.layers import Conv1D, GRU, Dropout, BatchNormalization, Dense, Activation
-from src.config import INPUT_SHAPE
 
-def build_model():
+def build_model(input_shape, num_classes):
     """
-    Bauen eines Keras-Modells für die Audio-Klassifikation
+    Build a Keras model for audio classification.
+    :param input_shape: Shape of the input data (e.g., (16000, 1))
+    :param num_classes: Number of output classes for classification
+    :return: Compiled Keras model
     """
     model = Sequential()
     
     # Conv1D Layer
-    model.add(Conv1D(64, 5, padding='same', input_shape=INPUT_SHAPE))
+    model.add(Conv1D(64, 5, padding='same', input_shape=input_shape))
     model.add(BatchNormalization())
     model.add(Activation('relu'))
     model.add(Dropout(0.5))
@@ -24,8 +31,8 @@ def build_model():
     model.add(BatchNormalization())
     
     # Dense Layer for Classification
-    model.add(Dense(1, activation='sigmoid'))
+    model.add(Dense(num_classes, activation='softmax'))  # For multi-class classification, use softmax
     
-    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     
     return model
