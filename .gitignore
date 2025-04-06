@@ -5,6 +5,8 @@ _pycache_/
 
 # Virtual environment
 venv/
+env/
+*.env
 
 # IDE files (Visual Studio Code)
 .vscode/
@@ -25,7 +27,7 @@ Thumbs.db
 *.coverage
 *.tox
 *.nox
-.coverage.
+.coverage.*
 nosetests.xml
 coverage.xml
 *.hypothesis/
@@ -43,3 +45,10 @@ coverage.xml
 # Other unnecessary files
 *.bak
 *.swp
+
+# Processed and raw data (to avoid pushing large data files)
+data/raw/
+data/processed/
+
+# Model files (to avoid pushing trained models)
+models/
