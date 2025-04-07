@@ -1,6 +1,7 @@
 import librosa
 import os
 import numpy as np
+import pandas as pd
 from src.config import N_MFCC, PROCESSED_DATA_DIR
 
 def extract_features(audio):
@@ -37,7 +38,21 @@ def save_features(features, labels, filename='features.csv'):
     """
     Save extracted features and labels to a CSV file.
     """
-    np.savetxt(os.path.join(PROCESSED_DATA_DIR, filename), np.column_stack((features, labels)), delimiter=',')
+    # Convert to a DataFrame
+    features_array = np.array(features)
+    labels_array = np.array(labels)
+    
+    # Ensure the labels are string type
+    labels_array = labels_array.astype(str)
+    
+    # Combine features and labels into a single DataFrame
+    df = pd.DataFrame(features_array)
+    df['label'] = labels_array
+    
+    # Save the DataFrame to a CSV file
+    output_path = os.path.join(PROCESSED_DATA_DIR, filename)
+    df.to_csv(output_path, index=False)
+    print(f"Features saved to {output_path}")
 
 def save_features_to_file(directory):
     """
